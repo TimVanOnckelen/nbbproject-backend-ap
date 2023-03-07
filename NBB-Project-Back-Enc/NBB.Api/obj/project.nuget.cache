@@ -1,14 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "98VnJx8mL+sF5RwSIYlGrOnA9ZlRbZ7Lmuis/7q7U+4FE8TofB4OXWTa9qo4Z9m66MWiaVfmjRlynWFHcBXqBw==",
+  "dgSpecHash": "zsQP2+n5Bv+aUkIaN/UIdUePr6Ws2s7Pvah8QBgaNKyqNWE40uIx8cnjWI1SA9465X/bJVpyXStPgwwZ770ztg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\s087068\\Projects\\NBB\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj",
+  "projectFilePath": "C:\\Users\\brdek\\Source\\Repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\s087068\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
-    "C:\\Users\\s087068\\.nuget\\packages\\swashbuckle.aspnetcore.annotations\\6.5.0\\swashbuckle.aspnetcore.annotations.6.5.0.nupkg.sha512",
-    "C:\\Users\\s087068\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
-    "C:\\Users\\s087068\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
-    "C:\\Users\\s087068\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+    "C:\\Users\\brdek\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\brdek\\.nuget\\packages\\swashbuckle.aspnetcore.annotations\\6.5.0\\swashbuckle.aspnetcore.annotations.6.5.0.nupkg.sha512",
+    "C:\\Users\\brdek\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\brdek\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\brdek\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
   ],
   "logs": []
 }

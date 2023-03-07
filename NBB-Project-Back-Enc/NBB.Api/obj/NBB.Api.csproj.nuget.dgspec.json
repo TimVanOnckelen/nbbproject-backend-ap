@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\s087068\\Projects\\NBB\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj": {}
+    "C:\\Users\\brdek\\Source\\Repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\s087068\\Projects\\NBB\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj": {
+    "C:\\Users\\brdek\\Source\\Repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\s087068\\Projects\\NBB\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj",
+        "projectUniqueName": "C:\\Users\\brdek\\Source\\Repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj",
         "projectName": "NBB.Api",
-        "projectPath": "C:\\Users\\s087068\\Projects\\NBB\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj",
-        "packagesPath": "C:\\Users\\s087068\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\s087068\\Projects\\NBB\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\obj\\",
+        "projectPath": "C:\\Users\\brdek\\Source\\Repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj",
+        "packagesPath": "C:\\Users\\brdek\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\brdek\\Source\\Repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\s087068\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\brdek\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -41,6 +41,10 @@
           "targetAlias": "net6.0",
           "dependencies": {
             "Swashbuckle.AspNetCore.Annotations": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
               "target": "Package",
               "version": "[6.5.0, )"
             },
