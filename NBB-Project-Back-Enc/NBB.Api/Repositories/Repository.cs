@@ -1,19 +1,10 @@
 ﻿using NBB.Api.Models;
 using NBB.Api.Repository;
-using System.Diagnostics.Contracts;
-using System.Linq.Expressions;
 
 
 namespace Repositories
 {
-    public interface IRepository
-    {
-        void Add(Onderneming onderneming);
-        void Delete(Onderneming onderneming);
-        Onderneming Get(string ondernemingsnummer);
-        IEnumerable<Onderneming> GetAll();
-        void Update(Onderneming onderneming);
-    }
+
 
     public class Repository : IRepository
     {
@@ -40,8 +31,14 @@ namespace Repositories
         }
         public void Update(Onderneming onderneming)
         {
-            var toUpdate = Get(onderneming.OndernemingsNummer);
-            toUpdate = onderneming;
+            var current = Get(onderneming.OndernemingsNummer);
+            var updated = onderneming;
+            if(current != null && updated != null) 
+            {
+                _ondernemingen.Remove(current);
+                _ondernemingen.Add(updated);
+            }
+            
         }
     }
 }
