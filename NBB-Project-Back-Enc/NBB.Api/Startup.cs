@@ -1,4 +1,6 @@
-﻿namespace NBB.Api
+﻿using Microsoft.AspNetCore.Builder;
+
+namespace NBB.Api
 {
     public class Startup
     {
