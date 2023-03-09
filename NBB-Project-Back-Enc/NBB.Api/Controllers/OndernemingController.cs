@@ -28,14 +28,14 @@ namespace NBB.Api.Controllers
         }
 
 
-        [HttpGet("{ondernemingsnumer}")]
+        [HttpGet("{ondernemingsnummer}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Get(string ondernemingsnumer)
+        public IActionResult Get(string ondernemingsnummer)
         {
-            var onderneming = _repository.Get(ondernemingsnumer);
+            var onderneming = _repository.Get(ondernemingsnummer);
             return Ok(onderneming);
         }
 

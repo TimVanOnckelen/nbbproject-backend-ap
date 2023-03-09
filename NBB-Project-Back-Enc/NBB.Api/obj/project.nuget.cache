@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zsQP2+n5Bv+aUkIaN/UIdUePr6Ws2s7Pvah8QBgaNKyqNWE40uIx8cnjWI1SA9465X/bJVpyXStPgwwZ770ztg==",
+  "dgSpecHash": "4W8h7Xow3mgYLtH1JzhGWDQMR9oHrVj7Shb3eNQ4h6A85VGM9eeyusVZyg86QtyRKzfVl03kjbV9QTg+OjbCsw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\brdek\\Source\\Repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj",
+  "projectFilePath": "C:\\Users\\brdek\\source\\repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\brdek\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
     "C:\\Users\\brdek\\.nuget\\packages\\swashbuckle.aspnetcore.annotations\\6.5.0\\swashbuckle.aspnetcore.annotations.6.5.0.nupkg.sha512",
