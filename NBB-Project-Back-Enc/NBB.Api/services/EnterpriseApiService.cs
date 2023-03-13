@@ -14,7 +14,8 @@ namespace NBB.Api.Services
 
         public async Task<Enterprise> GetWeatherDataAsync(string location)
         {
-            var response = await _httpClient.GetAsync($"https://api.weatherapi.com/v1/current.json?key=YOUR_API_KEY&q={location}");
+            //TODO: Add your API key here
+            var response = await _httpClient.GetAsync("");
 
             response.EnsureSuccessStatusCode();
 

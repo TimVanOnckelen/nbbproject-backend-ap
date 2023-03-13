@@ -1,10 +1,12 @@
 ﻿namespace NBB.Api.Models
 {
-    public class Adres
+    public class Address
     {
-        public string Straat { get; set; }
-        public string Huisnummer { get; set; }
-        public string Postcode { get; set; }
-        public string Plaats { get; set; }
+        public string Box { get; set; }
+        public string City { get; set; }
+        public string CountryCode { get; set; }
+        public string Number { get; set; }
+        public string PostalCode { get; set; }
+        public string Street { get; set; }
     }
 }

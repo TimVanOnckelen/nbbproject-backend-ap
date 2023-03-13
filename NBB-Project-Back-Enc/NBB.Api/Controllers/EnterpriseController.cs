@@ -7,11 +7,11 @@ namespace NBB.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class OndernemingController : Controller
+    public class EnterpriseController : Controller
     {
         private IRepository _repository;
 
-        public OndernemingController(IRepository repo)
+        public EnterpriseController(IRepository repo)
         {
             this._repository = repo;
         }
