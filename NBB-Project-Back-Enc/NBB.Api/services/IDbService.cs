@@ -1,11 +1,11 @@
 ﻿namespace NBB.Api.services
 {
-    public interface IDbService<TEntity> where TEntity : class
+    public interface IDbService<T> where T : class
     {
-        Task<TEntity> CreateAsync(TEntity entity);
+        Task<T> CreateAsync(T entity);
         Task DeleteAsync(int id);
-        Task<IEnumerable<TEntity>> GetAllAsync();
-        Task<TEntity> GetByIdAsync(int id);
-        Task UpdateAsync(int id, TEntity entity);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<T> GetByIdAsync(int id);
+        Task UpdateAsync(int id, T entity);
     }
 }
