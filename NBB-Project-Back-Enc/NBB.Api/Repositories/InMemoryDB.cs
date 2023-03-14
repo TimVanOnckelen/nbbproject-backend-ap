@@ -14,7 +14,7 @@ namespace NBB.Api.Repository
             {
                 new Enterprise
                 {
-                    EnterpriseName = "Takumi Ramen",
+                    EnterpriseName = "TAKUMI RAMEN KITCHEN ANTWERPEN",
                     Address = new Address
                     {
                         Street = "Marnixplein",
@@ -22,7 +22,22 @@ namespace NBB.Api.Repository
                         City = "Antwerpen",
                         PostalCode = "2000",
                         CountryCode = "BE"
-                    }
+                    },
+                    EnterpriseNumber = "0712.657.911"
+                },
+                new Enterprise
+                {
+                    EnterpriseName = "Takumi Groenplaats Antwerpen",
+                    Address = new Address
+                    {
+                        Street = "Groenplaats",
+                        Number = "16",
+                        City = "Antwerpen",
+                        PostalCode = "2000",
+                        CountryCode = "BE",
+                        Box = ""
+                    },
+                    EnterpriseNumber = "0764.896.369"
                 }
             };
         }
