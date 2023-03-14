@@ -5,10 +5,10 @@ namespace NBB.Api.Repository
 {
     public interface IRepository
     {
-        void Add(Onderneming onderneming);
-        void Delete(Onderneming onderneming);
-        Onderneming Get(string ondernemingsnummer);
-        IEnumerable<Onderneming> GetAll();
-        void Update(Onderneming onderneming);
+        void Add(Enterprise onderneming);
+        void Delete(Enterprise onderneming);
+        Enterprise Get(string ondernemingsnummer);
+        IEnumerable<Enterprise> GetAll();
+        void Update(Enterprise onderneming);
     }
 }

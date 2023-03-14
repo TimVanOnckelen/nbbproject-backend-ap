@@ -5,33 +5,32 @@ using NBB.Api.Repository;
 namespace Repositories
 {
 
-
     public class Repository : IRepository
     {
-        private readonly List<Onderneming> _ondernemingen;
+        private readonly List<Enterprise> _ondernemingen;
         public Repository()
         {
-            _ondernemingen = new List<Onderneming>();
+            _ondernemingen = new List<Enterprise>();
         }
-        public IEnumerable<Onderneming> GetAll()
+        public IEnumerable<Enterprise> GetAll()
         {
             return _ondernemingen;
         }
-        public Onderneming Get(string ondernemingsnummer)
+        public Enterprise    Get(string ondernemingsnummer)
         {
-            return _ondernemingen.FirstOrDefault(x => x.OndernemingsNummer == ondernemingsnummer);
+            return _ondernemingen.FirstOrDefault(x => x.EnterpriseNumber == ondernemingsnummer);
         }
-        public void Add(Onderneming onderneming)
+        public void Add(Enterprise onderneming)
         {
             _ondernemingen.Add(onderneming);
         }
-        public void Delete(Onderneming onderneming)
+        public void Delete(Enterprise onderneming)
         {
             _ondernemingen.Remove(onderneming);
         }
-        public void Update(Onderneming onderneming)
+        public void Update(Enterprise onderneming)
         {
-            var current = Get(onderneming.OndernemingsNummer);
+            var current = Get(onderneming.EnterpriseNumber);
             var updated = onderneming;
             if(current != null && updated != null) 
             {
