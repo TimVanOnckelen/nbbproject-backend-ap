@@ -2,13 +2,13 @@
 using NBB.Api.Repository;
 
 
-namespace Repositories
+namespace NBB.Api.Repository
 {
 
-    public class Repository : IRepository
+    public class InMemoryDB : IRepository
     {
         private readonly List<Enterprise> _ondernemingen;
-        public Repository()
+        public InMemoryDB()
         {
             _ondernemingen = new List<Enterprise>()
             {

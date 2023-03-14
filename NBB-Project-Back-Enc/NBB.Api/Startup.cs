@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using NBB.Api.Repository;
 
 namespace NBB.Api
 {
@@ -14,7 +15,7 @@ namespace NBB.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
-            //services.AddScoped<IContractRepository, EfContractRepository>();
+            services.AddScoped<IRepository, InMemoryDB>();
             services.AddControllers();
             services.AddSwaggerGen();
             var connection = configuration.GetConnectionString("NBBDatabase");
