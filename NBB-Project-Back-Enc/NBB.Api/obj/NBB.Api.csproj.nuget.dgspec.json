@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\brdek\\Source\\Repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj": {}
+    "C:\\Users\\brdek\\source\\repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\brdek\\Source\\Repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj": {
+    "C:\\Users\\brdek\\source\\repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brdek\\Source\\Repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj",
+        "projectUniqueName": "C:\\Users\\brdek\\source\\repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj",
         "projectName": "NBB.Api",
-        "projectPath": "C:\\Users\\brdek\\Source\\Repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj",
+        "projectPath": "C:\\Users\\brdek\\source\\repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\NBB.Api.csproj",
         "packagesPath": "C:\\Users\\brdek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brdek\\Source\\Repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\obj\\",
+        "outputPath": "C:\\Users\\brdek\\source\\repos\\nbbproject-backend-ap\\NBB-Project-Back-Enc\\NBB.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\brdek\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,6 +40,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
             "Swashbuckle.AspNetCore.Annotations": {
               "target": "Package",
               "version": "[6.5.0, )"
