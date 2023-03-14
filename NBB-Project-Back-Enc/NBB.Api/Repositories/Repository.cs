@@ -10,7 +10,21 @@ namespace Repositories
         private readonly List<Enterprise> _ondernemingen;
         public Repository()
         {
-            _ondernemingen = new List<Enterprise>();
+            _ondernemingen = new List<Enterprise>()
+            {
+                new Enterprise
+                {
+                    EnterpriseName = "Takumi Ramen",
+                    Address = new Address
+                    {
+                        Street = "Marnixplein",
+                        Number = "10",
+                        City = "Antwerpen",
+                        PostalCode = "2000",
+                        CountryCode = "BE"
+                    }
+                }
+            };
         }
         public IEnumerable<Enterprise> GetAll()
         {
