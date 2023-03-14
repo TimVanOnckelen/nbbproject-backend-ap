@@ -5,6 +5,8 @@
         public string EnterpriseNumber { get; set; }
         public string EnterpriseName { get; set; }
         public Address Address { get; set; }
-       
+        public string AccountingDataURL { get; set; }
+
+
     }
 }
