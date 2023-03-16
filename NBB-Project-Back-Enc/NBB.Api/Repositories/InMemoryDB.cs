@@ -1,21 +1,19 @@
-﻿using NBB.Api.Models;
+using NBB.Api.Models;
 using NBB.Api.Repository;
-
+using NBB.Api.services;
 
 namespace NBB.Api.Repository
 {
 
     public class InMemoryDB : IRepository
     {
-        private readonly List<Enterprise> _ondernemingen;
+        //private InMemoryDbContext _context;
         public InMemoryDB()
         {
-            _ondernemingen = new List<Enterprise>()
+            using (var _context = new InMemoryDbContext())
             {
-                new Enterprise
-                {
-                    EnterpriseName = "TAKUMI RAMEN KITCHEN ANTWERPEN",
-                    Address = new Address
+                var ondernemingen = new List<Enterprise> {
+                    new Enterprise
                     {
                         Street = "Marnixplein",
                         Number = "10",
@@ -71,30 +69,42 @@ namespace NBB.Api.Repository
         }
         public IEnumerable<Enterprise> GetAll()
         {
-            return _ondernemingen;
+            using (var _context = new InMemoryDbContext())
+            {
+                return _context.Enterprise;
+            }
         }
-        public Enterprise    Get(string ondernemingsnummer)
+        public Enterprise Get(string ondernemingsnummer)
         {
-            return _ondernemingen.FirstOrDefault(x => x.EnterpriseNumber == ondernemingsnummer);
+            using (var _context = new InMemoryDbContext())
+            {
+                return _context.Enterprise.FirstOrDefault(x => x.EnterpriseNumber == ondernemingsnummer);
+            }
         }
         public void Add(Enterprise onderneming)
         {
-            _ondernemingen.Add(onderneming);
+            using (var _context = new InMemoryDbContext())
+            {
+                _context.Enterprise.Add(onderneming);
+                _context.SaveChanges();
+            }
         }
         public void Delete(Enterprise onderneming)
         {
-            _ondernemingen.Remove(onderneming);
+            using (var _context = new InMemoryDbContext())
+            {
+                _context.Enterprise.Remove(onderneming);
+                _context.SaveChanges();
+            }
         }
         public void Update(Enterprise onderneming)
         {
-            var current = Get(onderneming.EnterpriseNumber);
-            var updated = onderneming;
-            if(current != null && updated != null) 
+            using (var _context = new InMemoryDbContext())
             {
-                _ondernemingen.Remove(current);
-                _ondernemingen.Add(updated);
+                var toUpdate = Get(onderneming.EnterpriseNumber);
+                toUpdate = onderneming;
+                _context.SaveChanges();
             }
-            
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
 using NBB.Api.Repository;
+using NBB.Api.services;
 
 namespace NBB.Api
 {
@@ -14,7 +16,6 @@ namespace NBB.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddScoped<IRepository, InMemoryDB>();
             services.AddControllers();
             services.AddSwaggerGen();
