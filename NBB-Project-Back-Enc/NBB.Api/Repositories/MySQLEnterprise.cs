@@ -1,7 +1,7 @@
 ﻿using NBB.Api.Models;
 using NBB.Api.services;
 
-namespace NBB.Api.Repositories
+namespace NBB.Api.Repository
 {
     public class MySQLEnterprise : IRepository
     {

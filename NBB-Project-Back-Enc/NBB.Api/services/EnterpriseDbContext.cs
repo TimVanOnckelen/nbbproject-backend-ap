@@ -11,7 +11,8 @@ namespace NBB.Api.services
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<Address>()
+                .HasKey(a => new {a.Street,a.Number, a.City});
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Enterprise> Enterprise { get; set; }

@@ -17,11 +17,11 @@ namespace NBB.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IRepository, InMemoryDB>();
+            services.AddScoped<IRepository, MySQLEnterprise>();
             services.AddControllers();
             services.AddSwaggerGen();
             var connection = configuration.GetConnectionString("NBBDatabase");
-            //services.AddDbContext<DbService<Enterprise>>(x => x.UseMySql(connection, ServerVersion.AutoDetect(connection)));
+            services.AddDbContext<EnterpriseDbContext>(x => x.UseMySql(connection, ServerVersion.AutoDetect(connection)));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
