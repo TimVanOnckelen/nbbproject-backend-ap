@@ -39,6 +39,30 @@ namespace NBB.Api.Controllers
             return Ok(onderneming);
         }
 
+        [HttpGet("{ondernemingsnummer}/{financialYear}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult GetByYear(string ondernemingsnummer, int financialYear)
+        {
+            var onderneming = _repository.Get(ondernemingsnummer);
+            if(onderneming.FinancialDataArray == null)
+            {
+                return NotFound();
+            }
+
+            var financialYearData = onderneming.FinancialDataArray.Find(data => data.Year == financialYear);
+
+
+            if(financialYearData == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(financialYearData);
+        }
+
 
     }
 }
