@@ -23,7 +23,24 @@ namespace NBB.Api.Repository
                         PostalCode = "2000",
                         CountryCode = "BE"
                     },
-                    EnterpriseNumber = "0712.657.911"
+                    EnterpriseNumber = "0712657911",
+                    FinancialDataArray = new List<FinancialData>()
+                    {
+                        new FinancialData
+                        {
+                            Id = 1,
+                            Year = 2021,
+                            Profit = 10000,
+                            Revenue = 21102
+                        },
+                        new FinancialData
+                        {
+                            Id = 2,
+                            Year = 2022,
+                            Profit = 12345,
+                            Revenue = 54321
+                        }
+                    }
                 },
                 new Enterprise
                 {
@@ -37,7 +54,18 @@ namespace NBB.Api.Repository
                         CountryCode = "BE",
                         Box = ""
                     },
-                    EnterpriseNumber = "0764.896.369"
+                    EnterpriseNumber = "0764896369",
+                    FinancialDataArray = new List<FinancialData>()
+                    {
+                        new FinancialData
+                        {
+                            Id = 1,
+                            Year = 2021,
+                            Profit = 3420,
+                            Revenue = -1102
+                        },
+          
+                    }
                 }
             };
         }

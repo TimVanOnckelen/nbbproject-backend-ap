@@ -7,6 +7,7 @@
         public Address Address { get; set; }
         public string AccountingDataURL { get; set; }
 
+        public List<FinancialData> FinancialDataArray { get; set; }
 
     }
 }

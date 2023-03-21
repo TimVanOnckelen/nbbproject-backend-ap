@@ -33,6 +33,15 @@ namespace NBB.Api
                     c.SwaggerEndpoint("./swagger/v1/swagger.json", "NBB API");
                     c.RoutePrefix = String.Empty;
                 });
+
+                // TO BE EDITED!
+                app.UseCors(builder =>
+                {
+                    builder
+                    .AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+                });
             }
             else
             {
