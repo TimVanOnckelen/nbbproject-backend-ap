@@ -36,6 +36,12 @@ namespace NBB.Api.Controllers
         public IActionResult Get(string ondernemingsnummer)
         {
             var onderneming = _repository.Get(ondernemingsnummer);
+
+            if (onderneming == null)
+            {
+                return NotFound();
+            }
+
             return Ok(onderneming);
         }
 
