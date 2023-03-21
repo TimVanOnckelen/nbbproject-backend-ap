@@ -15,32 +15,34 @@ namespace NBB.Api.Repository
                 var ondernemingen = new List<Enterprise> {
                     new Enterprise
                     {
-                        Street = "Marnixplein",
-                        Number = "10",
-                        City = "Antwerpen",
-                        PostalCode = "2000",
-                        CountryCode = "BE"
-                    },
-                    EnterpriseNumber = "0712657911",
-                    FinancialDataArray = new List<FinancialData>()
-                    {
-                        new FinancialData
+                        Address = new Address
                         {
-                            Id = 1,
-                            Year = 2021,
-                            Profit = 10000,
-                            Revenue = 21102
+                            Street = "Marnixplein",
+                            Number = "10",
+                            City = "Antwerpen",
+                            PostalCode = "2000",
+                            CountryCode = "BE"
                         },
-                        new FinancialData
+                        EnterpriseNumber = "0712657911",
+                        FinancialDataArray = new List<FinancialData>()
                         {
-                            Id = 2,
-                            Year = 2022,
-                            Profit = 12345,
-                            Revenue = 54321
+                            new FinancialData
+                            {
+                                Id = 1,
+                                Year = 2021,
+                                Profit = 10000,
+                                Revenue = 21102
+                            },
+                            new FinancialData
+                            {
+                                Id = 2,
+                                Year = 2022,
+                                Profit = 12345,
+                                Revenue = 54321
+                            }
                         }
-                    }
-                },
-                new Enterprise
+                    },
+                    new Enterprise
                 {
                     EnterpriseName = "Takumi Groenplaats Antwerpen",
                     Address = new Address
@@ -62,9 +64,12 @@ namespace NBB.Api.Repository
                             Profit = 3420,
                             Revenue = -1102
                         },
-          
+
                     }
                 }
+
+                };
+                
             };
         }
         public IEnumerable<Enterprise> GetAll()
