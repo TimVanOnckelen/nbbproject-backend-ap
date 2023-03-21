@@ -17,8 +17,11 @@
 mono_crash.*
 
 # Build results
-[Dd]ebug/
-[Dd]ebugPublic/
+*Debug*
+NBB-Project-Back-Enc\NBB.Api\obj*
+*NBB.API/Debug/dotnet6*
+*[Dd]ebug/*
+*[Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
 x64/
@@ -27,7 +30,7 @@ x86/
 [Aa][Rr][Mm]/
 [Aa][Rr][Mm]64/
 bld/
-[Bb]in/
+*[Bb]in/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
@@ -396,3 +399,10 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+NBB-Project-Back-Enc/NBB.Api/obj/NBB.Api.csproj.nuget.g.props
+NBB-Project-Back-Enc/NBB.Api/obj/NBB.Api.csproj.nuget.dgspec.json
+NBB-Project-Back-Enc/NBB.Api/obj/project.assets.json
+NBB-Project-Back-Enc/NBB.Api/obj/project.nuget.cache
+NBB-Project-Back-Enc/NBB.Api/obj/Debug/net6.0/NBB.Api.assets.cache
+NBB-Project-Back-Enc/NBB.Api/obj/Debug/net6.0/NBB.Api.csproj.AssemblyReference.cache
+NBB-Project-Back-Enc/NBB.Api/obj/Debug/net6.0/NBB.Api.GeneratedMSBuildEditorConfig.editorconfig
