@@ -21,9 +21,9 @@ namespace NBB.Api.Services
 
             var responseContent = await response.Content.ReadAsStringAsync();
 
-            var weatherData = JsonConvert.DeserializeObject<Enterprise>(responseContent);
+            var enterprise = JsonConvert.DeserializeObject<Enterprise>(responseContent);
 
-            return weatherData;
+            return enterprise;
         }
     }
 }

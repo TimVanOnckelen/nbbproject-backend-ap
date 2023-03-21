@@ -13,6 +13,12 @@ namespace NBB.Api.services
             _dbSet = dbContext.Set<T>();
         }
 
+        /// <summary>
+        /// Get all data from the database in List format
+        /// </summary>
+        /// <returns>
+        /// returns a List of <T>
+        /// </returns>
         public async Task<IEnumerable<T>> GetAllAsync()
         {
             return await _dbSet.ToListAsync();

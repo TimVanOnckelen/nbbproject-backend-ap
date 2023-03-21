@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NBB.Api.Models;
 using NBB.Api.Repository;
+using NBB.Api.services;
 
 namespace NBB.Api.Controllers
 {
@@ -10,10 +11,13 @@ namespace NBB.Api.Controllers
     public class EnterpriseController : Controller
     {
         private IRepository _repository;
+        private DbService<Enterprise> _dbService;
+        private DbService<User> 
 
         public EnterpriseController(IRepository repo)
         {
             this._repository = repo;
+            _dbService.GetAllAsync();
         }
 
         [HttpGet]
