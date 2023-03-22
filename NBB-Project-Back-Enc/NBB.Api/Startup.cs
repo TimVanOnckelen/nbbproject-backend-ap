@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using NBB.Api.Data;
+using NBB.Api.Models;
 using NBB.Api.Repository;
+using System.Configuration;
 
 namespace NBB.Api
 {
@@ -19,7 +23,9 @@ namespace NBB.Api
             services.AddControllers();
             services.AddSwaggerGen();
             var connection = configuration.GetConnectionString("NBBDatabase");
-            //services.AddDbContext<ContractDBContext>(x => x.UseMySql(connection, ServerVersion.AutoDetect(connection)));
+            services.AddDbContext<NbbDbContext<Enterprise>>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
