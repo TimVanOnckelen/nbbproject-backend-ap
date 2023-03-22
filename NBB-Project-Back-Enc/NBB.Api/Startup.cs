@@ -23,8 +23,10 @@ namespace NBB.Api
             services.AddControllers();
             services.AddSwaggerGen();
             var connection = configuration.GetConnectionString("NBBDatabase");
-            services.AddDbContext<NbbDbContext<Enterprise>>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<NbbDbContext<Enterprise>>(options =>
+            // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            //services.AddDbContext<NbbDbContext<User>>(options =>
+            // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
         }
 

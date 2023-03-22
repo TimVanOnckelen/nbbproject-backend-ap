@@ -1,31 +1,30 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using NBB.Api.Data;
 
-namespace NBB.Api.services
+namespace NBB.Api.Services
 {
     public class DbService<T> : IDbService<T> where T : class
     {
-        private readonly DbContext _dbContext;
-        private readonly DbSet<T> _dbSet;
-
-        public DbService(DbContext dbContext)
+        private readonly NbbDbContext<T> _dbContext;
+  
+        public DbService(NbbDbContext<T> dbContext)
         {
             _dbContext = dbContext;
-            _dbSet = dbContext.Set<T>();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _dbSet.ToListAsync();
+            return await _dbContext.Entities.ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(int id)
         {
-            return await _dbSet.FindAsync(id);
+            return await _dbContext.Entities.FindAsync(id);
         }
 
         public async Task<T> CreateAsync(T entity)
         {
-            _dbSet.Add(entity);
+            _dbContext.Entities.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
             return entity;
         }
@@ -36,15 +35,12 @@ namespace NBB.Api.services
             await _dbContext.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(int id)
+        public async Task DeleteAsync(T entity)
         {
-            T entity = await _dbSet.FindAsync(id);
-            if (entity != null)
-            {
-                _dbSet.Remove(entity);
-                await _dbContext.SaveChangesAsync();
-            }
+            _dbContext.Remove(entity);
+            await _dbContext.SaveChangesAsync();
         }
+
     }
 
 }
