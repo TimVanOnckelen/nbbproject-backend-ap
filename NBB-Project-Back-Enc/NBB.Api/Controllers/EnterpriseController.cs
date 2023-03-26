@@ -15,7 +15,13 @@ namespace NBB.Api.Controllers
         {
             this._repository = repo;
         }
-
+        
+        /// <summary>
+        /// Default call. Geeft alle ondernemingen terug die voorkomen in _repository
+        /// </summary>
+        /// <returns>
+        /// IEnumarable<Enterprise>
+        /// </returns>
         [HttpGet]
         [ProducesResponseType(typeof(List<Enterprise>),StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -27,7 +33,11 @@ namespace NBB.Api.Controllers
             return Ok(ondernemingen);
         }
 
-
+        /// <summary>
+        /// Vraag de gegevens van een specifieke onderneming op.
+        /// </summary>
+        /// <param name="ondernemingsnummer"></param>
+        /// <returns>Enterprise</returns>
         [HttpGet("{ondernemingsnummer}")]
         [ProducesResponseType(typeof(Enterprise),StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -44,6 +54,7 @@ namespace NBB.Api.Controllers
 
             return Ok(onderneming);
         }
+
 
         [HttpGet("{ondernemingsnummer}/{financialYear}")]
         [ProducesResponseType(typeof(FinancialData),StatusCodes.Status200OK)]

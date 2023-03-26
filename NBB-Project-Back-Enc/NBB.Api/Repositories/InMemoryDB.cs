@@ -8,6 +8,9 @@ namespace NBB.Api.Repository
     public class InMemoryDB : IRepository
     {
         private readonly List<Enterprise> _ondernemingen;
+        /// <summary>
+        /// Genereer een nieuwe repo met een paar dummy entries.
+        /// </summary>
         public InMemoryDB()
         {
             _ondernemingen = new List<Enterprise>()
