@@ -40,7 +40,8 @@ namespace NBB.Api.Services
         /// <returns>Geeft een bedrijf terug</returns>
         public async Task<Enterprise> GetEnterprise(string legalEntityId)
         {
-            var uri = $"/legalEntity/{legalEntityId}/references";
+            //Example legalEntityId: 0407239355
+            var uri = $"/legalEntity/{legalEntityId}/references?2022";
 
             var response = await _httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
@@ -58,6 +59,7 @@ namespace NBB.Api.Services
         /// <returns>Accounting data van een specifiek bedrijf gedurende een specifiek jaar</returns>
         public async Task<FinancialData> getFinancialData(string ReferenceId)
         {
+            //Example ReferenceId: 2021-14500450
             var uri = $"authentic/deposit/{ReferenceId}/accountingData";
 
             var response = await _httpClient.GetAsync(uri);
