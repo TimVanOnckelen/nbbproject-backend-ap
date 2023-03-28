@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using NBB.Api.Data;
 using NBB.Api.Models;
@@ -27,7 +28,7 @@ namespace NBB.Api
             // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             //services.AddDbContext<NbbDbContext<User>>(options =>
             // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
+            services.AddScoped<AuthenticationService, AuthenticationService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

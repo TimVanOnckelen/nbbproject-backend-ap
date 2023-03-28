@@ -4,7 +4,7 @@ using NBB.Api.Controllers;
 using NBB.Api.Models;
 using NBB.Api.Repository;
 
-namespace NBB.Api.Tests
+namespace NBB.Api.Tests.Controllers
 {
     public class EnterpriseControllerTests
     {
@@ -12,7 +12,7 @@ namespace NBB.Api.Tests
         public void Setup()
         {
 
-            
+
 
         }
 
