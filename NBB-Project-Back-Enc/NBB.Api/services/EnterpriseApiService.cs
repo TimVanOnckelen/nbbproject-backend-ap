@@ -31,7 +31,6 @@ namespace NBB.Api.Services
             _httpClient.DefaultRequestHeaders.Add("X-Request-Id", RequestId);
             _httpClient.DefaultRequestHeaders.Add("User-Agent", "AP NBB project");
             _httpClient.DefaultRequestHeaders.Add("Accept", "application/x.jsonxbrl");
-
         }
         /// <summary>
         /// GetEnterprise gaat informatie voor een specifiek bedrijf ophalen. Naast de logische naam en adres geeft deze ook de accounting data terug in de vorm van een URL. 
