@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Configuration;
 using NBB.Api.Data;
 using NBB.Api.Models;
@@ -19,17 +21,31 @@ namespace NBB.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddScoped<IRepository, InMemoryDB>();
             services.AddControllers();
             services.AddSwaggerGen();
-            var connection = configuration.GetConnectionString("NBBDatabase");
-            //services.AddDbContext<NbbDbContext<Enterprise>>(options =>
-            // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            //services.AddDbContext<NbbDbContext<User>>(options =>
-            // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<AuthenticationService, AuthenticationService>();
+
+            var connection = configuration.GetConnectionString("DefaultConnection");
+
+            services.AddDbContext<NbbDbContext<Enterprise>>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("NBBDatabase")));
+
+            services.AddDbContext<NbbDbContext<User>>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IDbContextFactory<NbbDbContext<User>>>(provider =>
+            {
+                var optionsBuilder = new DbContextOptionsBuilder<NbbDbContext<User>>();
+                optionsBuilder.UseSqlServer(connection);
+                var dbContext = new NbbDbContext<User>(optionsBuilder.Options);
+                return new DbContextFactory<NbbDbContext<User>>(provider, optionsBuilder.Options, new DbContextFactorySource<NbbDbContext<User>>());
+            });
+
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
         }
+
+
+
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -61,8 +77,9 @@ namespace NBB.Api
             }
 
             app.UseRouting();
-
+            app.UseAuthorization();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
+
     }
 }
