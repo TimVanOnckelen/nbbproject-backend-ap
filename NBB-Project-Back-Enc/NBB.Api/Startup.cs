@@ -24,9 +24,9 @@ namespace NBB.Api
             services.AddScoped<IRepository, InMemoryDB>();
             services.AddControllers();
             services.AddSwaggerGen();
-            var connection = configuration.GetConnectionString("Server=localhost;Database=nbb;Trusted_Connection=True;");
+            var connection = configuration.GetConnectionString("Server=localhost;Database=master;Trusted_Connection=True;");
             services.AddDbContext<NbbDbContext<Enterprise>>(options =>
-            options.UseSqlServer(connection));
+            options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Integrated Security=true;Database=nbb;"));
             //services.AddDbContext<NbbDbContext<User>>(options =>
             // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
