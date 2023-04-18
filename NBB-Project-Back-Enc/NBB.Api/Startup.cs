@@ -7,6 +7,8 @@ using NBB.Api.Data;
 using NBB.Api.Models;
 using NBB.Api.Repository;
 using System.Configuration;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace NBB.Api
 {
