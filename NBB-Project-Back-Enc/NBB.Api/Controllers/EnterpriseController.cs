@@ -6,9 +6,9 @@ using NBB.Api.Repository;
 
 namespace NBB.Api.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EnterpriseController : Controller
     {
         private IRepository _repository;
