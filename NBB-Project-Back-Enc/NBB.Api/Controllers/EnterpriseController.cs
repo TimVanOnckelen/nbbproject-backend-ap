@@ -70,7 +70,5 @@ namespace NBB.Api.Controllers
 
             return Ok(financialYearData);
         }
-
-
     }
 }

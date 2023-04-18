@@ -11,93 +11,58 @@ namespace NBB.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticationController : ControllerBase
+    public class TokenController : ControllerBase
     {
-        private readonly IAuthenticationService _authenticationService;
-        private readonly IConfiguration _configuration;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IConfiguration configuration;
 
-        public AuthenticationController(IAuthenticationService authenticationService, IConfiguration configuration, UserManager<IdentityUser> userManager)
+        public TokenController(IConfiguration configuration)
         {
-            _authenticationService = authenticationService;
-            _configuration = configuration;
-            _userManager = userManager;
+            this.configuration = configuration;
         }
 
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(User user)
+        [HttpPost]
+        public IActionResult CreateToken([FromBody] UserLogin loginModel)
         {
-            bool isAuthenticated = await _authenticationService.AuthenticateUserAsync(user.UserName, user.Password);
+            IActionResult response = Unauthorized();
 
-            if (isAuthenticated)
-            {
-                // User is authenticated, generate JWT token
-                var jwtToken = GenerateJwtToken(user);
+            User user = Authenticate(loginModel);
 
-                // Return success response with JWT token
-                return Ok(new { message = "Login successful", token = jwtToken });
-            }
-            else
+            if (user != null)
             {
-                // User authentication failed, return error response
-                return Unauthorized(new { message = "Invalid username or password" });
+                string tokenString = BuildToken(user);
+                return Ok(new { token = tokenString });
             }
+
+            return response;
         }
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] JObject data)
+        private string BuildToken(User userModel)
         {
-            var username = data["username"].ToString();
-            var email = data["email"].ToString();
-            var password = data["password"].ToString();
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:ServerSecret"]));
+            var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-            var user = new IdentityUser
-            {
-                UserName = username,
-                Email = email,
-                // set any other properties needed for user registration
-            };
+            var token = new JwtSecurityToken(
+                configuration["JWT:Issuer"],
+                configuration["JWT:Issuer"],
+                expires: DateTime.Now.AddMinutes(60),
+                signingCredentials: credentials
+                );
 
-            var result = await _userManager.CreateAsync(user, password);
+            return new JwtSecurityTokenHandler().WriteToken(token);
 
-            if (result.Succeeded)
-            {
-                // User was created successfully, generate JWT token
-                var jwtToken = GenerateJwtToken(user);
-
-                // Return success response with JWT token
-                return Ok(new { message = "User created", token = jwtToken });
-            }
-            else
-            {
-                // User creation failed, return error response
-                return BadRequest(new { errors = result.Errors });
-            }
         }
 
-        private string GenerateJwtToken(IdentityUser user)
+        private User Authenticate(UserLogin loginModel)
         {
-            var jwtSettings = _configuration.GetSection("JwtSettings");
-            var key = Encoding.ASCII.GetBytes(jwtSettings.GetValue<string>("Secret"));
-
-            var claims = new List<Claim>
+            if (loginModel.UserName == "Pablo" && loginModel.Password == "QWERTY")
             {
-                new Claim(JwtRegisteredClaimNames.Sub, user.Id),
-                new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
-            };
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.UtcNow.AddDays(jwtSettings.GetValue<int>("ExpirationInDays")),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-
-            return tokenHandler.WriteToken(token);
+                return new User()
+                {
+                    UserName = loginModel.UserName,
+                    Password = loginModel.Password
+                };
+            }
+            return null;
         }
     }
 }

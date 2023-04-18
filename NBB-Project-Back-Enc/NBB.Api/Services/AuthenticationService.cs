@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.Options;
 using NBB.Api.Data;
 using NBB.Api.Models;
+using System.Security.Cryptography;
 
 public class AuthenticationService : IAuthenticationService
 {
@@ -28,6 +24,7 @@ public class AuthenticationService : IAuthenticationService
         var lookupNormalizer = new UpperInvariantLookupNormalizer();
         var errorDescriber = new IdentityErrorDescriber();
         var serviceProvider = new ServiceCollection().BuildServiceProvider();
+        _logger = logger;
 
         _userManager = new UserManager<User>(
             userStore,
@@ -38,7 +35,7 @@ public class AuthenticationService : IAuthenticationService
             lookupNormalizer,
             errorDescriber,
             serviceProvider,
-            logger);
+            _logger);
     }
 
 

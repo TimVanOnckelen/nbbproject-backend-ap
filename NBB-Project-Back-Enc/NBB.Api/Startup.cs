@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using NBB.Api.Data;
 using NBB.Api.Models;
 using NBB.Api.Repository;
-using System.Configuration;
+using System.Text;
 
 namespace NBB.Api
 {
@@ -21,31 +22,26 @@ namespace NBB.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IRepository, InMemoryDB>();
-            services.AddControllers();
-            services.AddSwaggerGen();
-
             var connection = configuration.GetConnectionString("DefaultConnection");
 
             services.AddDbContext<NbbDbContext<Enterprise>>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("NBBDatabase")));
-
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<NbbDbContext<User>>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddScoped<IDbContextFactory<NbbDbContext<User>>>(provider =>
-            {
-                var optionsBuilder = new DbContextOptionsBuilder<NbbDbContext<User>>();
-                optionsBuilder.UseSqlServer(connection);
-                var dbContext = new NbbDbContext<User>(optionsBuilder.Options);
-                return new DbContextFactory<NbbDbContext<User>>(provider, optionsBuilder.Options, new DbContextFactorySource<NbbDbContext<User>>());
-            });
-
-            services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddControllers();
+            services.AddSwaggerGen();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    var sKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:ServerSecret"]));
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        IssuerSigningKey = sKey,
+                        ValidIssuer = configuration["JWT:Issuer"],
+                        ValidAudience = configuration["JWT:Issuer"]
+                    };
+                });
         }
-
-
-
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -83,3 +79,5 @@ namespace NBB.Api
 
     }
 }
+
+
