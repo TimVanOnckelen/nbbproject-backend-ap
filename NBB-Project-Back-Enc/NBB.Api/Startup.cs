@@ -4,6 +4,8 @@ using NBB.Api.Data;
 using NBB.Api.Models;
 using NBB.Api.Repository;
 using System.Configuration;
+using Microsoft.EntityFrameworkCore;
+
 
 namespace NBB.Api
 {
@@ -22,9 +24,9 @@ namespace NBB.Api
             services.AddScoped<IRepository, InMemoryDB>();
             services.AddControllers();
             services.AddSwaggerGen();
-            var connection = configuration.GetConnectionString("NBBDatabase");
-            //services.AddDbContext<NbbDbContext<Enterprise>>(options =>
-            // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            var connection = configuration.GetConnectionString("Server=localhost;Database=nbb;Trusted_Connection=True;");
+            services.AddDbContext<NbbDbContext<Enterprise>>(options =>
+            options.UseSqlServer(connection));
             //services.AddDbContext<NbbDbContext<User>>(options =>
             // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
