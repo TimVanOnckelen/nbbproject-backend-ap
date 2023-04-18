@@ -28,6 +28,7 @@ namespace NBB.Api
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<NbbDbContext<User>>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -41,6 +42,8 @@ namespace NBB.Api
                         ValidAudience = configuration["JWT:Issuer"]
                     };
                 });
+            services.AddTransient<IRepository<Enterprise>, InMemoryDB<Enterprise>>();
+            services.AddTransient<IRepository<User>, InMemoryDB<User>>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -71,7 +74,7 @@ namespace NBB.Api
                     ExceptionHandler = context => context.Response.WriteAsync("OOPS")
                 });
             }
-
+            app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });

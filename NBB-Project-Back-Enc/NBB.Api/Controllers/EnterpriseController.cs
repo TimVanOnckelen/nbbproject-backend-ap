@@ -11,9 +11,9 @@ namespace NBB.Api.Controllers
     [Authorize]
     public class EnterpriseController : Controller
     {
-        private IRepository _repository;
+        private IRepository<Enterprise> _repository;
 
-        public EnterpriseController(IRepository repo)
+        public EnterpriseController(IRepository<Enterprise> repo)
         {
             this._repository = repo;
         }
