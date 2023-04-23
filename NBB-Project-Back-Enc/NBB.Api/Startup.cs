@@ -28,7 +28,6 @@ namespace NBB.Api
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<NbbDbContext<User>>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-
             services.AddControllers();
             services.AddSwaggerGen();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -76,7 +75,9 @@ namespace NBB.Api
             }
             app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 

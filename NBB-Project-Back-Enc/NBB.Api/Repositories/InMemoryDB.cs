@@ -1,5 +1,4 @@
 ﻿using NBB.Api.Models;
-using NBB.Api.Repository;
 
 
 namespace NBB.Api.Repository
