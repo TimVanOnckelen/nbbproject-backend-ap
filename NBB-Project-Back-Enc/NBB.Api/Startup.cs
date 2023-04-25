@@ -24,25 +24,18 @@ namespace NBB.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IRepository, InMemoryDB>();
+
+            services.AddTransient<IDbService<Enterprise>, DbService<Enterprise>>();
+            services.AddTransient<IRepository, DbRepoEnterprises>();
+
+            var connection = configuration.GetConnectionString("Server=localhost;Database=master;Trusted_Connection=True;");
+            services.AddDbContext<NbbDbContext<Enterprise>>(options =>
+            options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Integrated Security=true;Database=nbb;"));
             services.AddControllers();
             services.AddSwaggerGen();
 
-            var connection = configuration.GetConnectionString("DefaultConnection");
-
-            services.AddDbContext<NbbDbContext<Enterprise>>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("NBBDatabase")));
-
-            services.AddDbContext<NbbDbContext<User>>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-
-            services.AddScoped<IDbContextFactory<NbbDbContext<User>>>(provider =>
-            {
-                var optionsBuilder = new DbContextOptionsBuilder<NbbDbContext<User>>();
-                optionsBuilder.UseSqlServer(connection);
-                var dbContext = new NbbDbContext<User>(optionsBuilder.Options);
-                return new DbContextFactory<NbbDbContext<User>>(provider, optionsBuilder.Options, new DbContextFactorySource<NbbDbContext<User>>());
-            });
+            //services.AddDbContext<NbbDbContext<User>>(options =>
+            // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IAuthenticationService, AuthenticationService>();
         }
