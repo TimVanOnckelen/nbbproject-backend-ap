@@ -9,6 +9,7 @@ using NBB.Api.Repository;
 using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using NBB.Api.Repositories;
+using NBB.Api.Services;
 
 namespace NBB.Api
 {
