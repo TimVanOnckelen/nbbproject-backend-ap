@@ -8,37 +8,47 @@ namespace NBB.Api.Repositories
     public class DbRepoEnterprises: IRepository
     {
             private readonly IDbService<Enterprise> _context;
-            public DbRepoEnterprises()
+            public DbRepoEnterprises(DbService<Enterprise> context)
             {
-            _context = new DbService<Enterprise>();
+            
+            _context = context;
             }
-            public IEnumerable<Enterprise> GetAll()
+            public async Task<IEnumerable<Enterprise>>  GetAll()
             {
-                return _ondernemingen;
+            return await _context.GetAllAsync();
             }
-            public Enterprise Get(string ondernemingsnummer)
+            public  async Task<Enterprise> Get(int companyId)
             {
-                return _ondernemingen.FirstOrDefault(x => x.EnterpriseNumber == ondernemingsnummer);
+                return await _context.GetByIdAsync(companyId);
             }
-            public void Add(Enterprise onderneming)
+            public async void Add(Enterprise onderneming)
             {
-                _ondernemingen.Add(onderneming);
+                await _context.CreateAsync(onderneming);
             }
-            public void Delete(Enterprise onderneming)
+            public async void Delete(Enterprise onderneming)
             {
-                _ondernemingen.Remove(onderneming);
+                await _context.DeleteAsync(onderneming);
             }
-            public void Update(Enterprise onderneming)
+            public async void Update(Enterprise onderneming)
             {
-                var current = Get(onderneming.EnterpriseNumber);
+                var current = await _context.GetByIdAsync(onderneming.Id);
                 var updated = onderneming;
                 if (current != null && updated != null)
                 {
-                    _ondernemingen.Remove(current);
-                    _ondernemingen.Add(updated);
+                    await _context.UpdateAsync(onderneming.Id,current);
                 }
 
             }
+
+        public Enterprise Get(string ondernemingsnummer)
+        {
+            throw new NotImplementedException();
         }
+
+        IEnumerable<Enterprise> IRepository.GetAll()
+        {
+            throw new NotImplementedException();
+        }
+    }
     
 }
