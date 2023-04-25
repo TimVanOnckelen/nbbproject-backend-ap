@@ -18,6 +18,10 @@ namespace NBB.Api.Controllers
         }
 
         [HttpPost]
+        [ProducesResponseType(typeof(Token), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult CreateToken([FromBody] UserLogin loginModel)
         {
             IActionResult response = Unauthorized();
@@ -27,7 +31,7 @@ namespace NBB.Api.Controllers
             if (user != null)
             {
                 string tokenString = BuildToken(user);
-                return Ok(new { token = tokenString });
+                return Ok(new Token { tokenId = tokenString });
             }
 
             return response;
