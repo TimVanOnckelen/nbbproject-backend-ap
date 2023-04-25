@@ -1,10 +1,9 @@
 ﻿using NBB.Api.Models;
-using NBB.Api.Repository;
 
 namespace NBB.Api.Repository
 {
 
-    public class InMemoryDB : IRepository
+    public class InMemoryDB<T> : IRepository<T> where T : class
     {
         private readonly List<Enterprise> _ondernemingen;
         public InMemoryDB()
@@ -13,9 +12,21 @@ namespace NBB.Api.Repository
             {
                 new Enterprise
                 {
+                    ReferenceNumber = "2021-00000148",
+                    DepositDate = "2021-12-07",
+                    ExerciseDates = new ExerciseDates
+                    {
+                        startDate = "2020-01-01",
+                        endDate = "2020-12-31"
+                    },
+                    ModelType = "m02-f",
+                    DepositType = "Initial",
+                    Language = "NL",
+                    Currency = "EUR",
                     EnterpriseName = "TAKUMI RAMEN KITCHEN ANTWERPEN",
                     Address = new Address
                     {
+                        Box = null,
                         Street = "Marnixplein",
                         Number = "10",
                         City = "Antwerpen",
@@ -23,6 +34,14 @@ namespace NBB.Api.Repository
                         CountryCode = "BE"
                     },
                     EnterpriseNumber = "0712657911",
+                    LegalForm = "014",
+                    LegalSituation = "000",
+                    FullFillLegalValidation = true,
+                    ActivityCode = null,
+                    GeneralAssemblyDate = "2021-06-01",
+                    DataVersion = "Authentic",
+                    ImprovementDate = null,
+                    CorrectedData = null,
                     FinancialDataArray = new List<FinancialData>()
                     {
                         new FinancialData
@@ -43,6 +62,17 @@ namespace NBB.Api.Repository
                 },
                 new Enterprise
                 {
+                    ReferenceNumber = "2021-00000148",
+                    DepositDate = "2021-12-07",
+                    ExerciseDates = new ExerciseDates
+                    {
+                        startDate = "2020-01-01",
+                        endDate = "2020-12-31"
+                    },
+                    ModelType = "m02-f",
+                    DepositType = "Initial",
+                    Language = "NL",
+                    Currency = "EUR",
                     EnterpriseName = "Takumi Groenplaats Antwerpen",
                     Address = new Address
                     {
@@ -54,6 +84,14 @@ namespace NBB.Api.Repository
                         Box = ""
                     },
                     EnterpriseNumber = "0764896369",
+                    LegalForm = "014",
+                    LegalSituation = "000",
+                    FullFillLegalValidation = true,
+                    ActivityCode = null,
+                    GeneralAssemblyDate = "2021-06-01",
+                    DataVersion = "Authentic",
+                    ImprovementDate = null,
+                    CorrectedData = null,
                     FinancialDataArray = new List<FinancialData>()
                     {
                         new FinancialData

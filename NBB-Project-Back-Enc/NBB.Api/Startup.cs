@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
-using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using NBB.Api.Data;
 using NBB.Api.Models;
 using NBB.Api.Repository;
@@ -10,6 +11,7 @@ using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using NBB.Api.Repositories;
 using NBB.Api.Services;
+using System.Text;
 
 namespace NBB.Api
 {
@@ -38,10 +40,25 @@ namespace NBB.Api
             // options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<NbbDbContext<User>>(options =>
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            services.AddControllers();
+            services.AddSwaggerGen();
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    var sKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:ServerSecret"]));
+                    options.TokenValidationParameters = new TokenValidationParameters()
+                    {
+                        IssuerSigningKey = sKey,
+                        ValidIssuer = configuration["JWT:Issuer"],
+                        ValidAudience = configuration["JWT:Issuer"]
+                    };
+                });
+            services.AddTransient<IRepository<Enterprise>, InMemoryDB<Enterprise>>();
+            services.AddTransient<IRepository<User>, InMemoryDB<User>>();
         }
-
-
-
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -56,13 +73,13 @@ namespace NBB.Api
                 });
 
                 // TO BE EDITED!
-                app.UseCors(builder =>
-                {
-                    builder
-                    .AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-                });
+               //app.UseCors(builder =>
+                //{
+                //    builder
+                //    .AllowAnyOrigin()
+                //    .AllowAnyMethod()
+                //    .AllowAnyHeader();
+                //});
             }
             else
             {
@@ -71,11 +88,15 @@ namespace NBB.Api
                     ExceptionHandler = context => context.Response.WriteAsync("OOPS")
                 });
             }
-
+            app.UseHttpsRedirection();
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
+
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
 
     }
 }
+
+

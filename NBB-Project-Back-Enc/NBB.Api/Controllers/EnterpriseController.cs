@@ -1,19 +1,18 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NBB.Api.Models;
 using NBB.Api.Repository;
 
 namespace NBB.Api.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class EnterpriseController : Controller
     {
-        private IRepository _repository;
+        private IRepository<Enterprise> _repository;
 
-        public EnterpriseController(IRepository repo)
+        public EnterpriseController(IRepository<Enterprise> repo)
         {
             this._repository = repo;
         }
@@ -70,7 +69,5 @@ namespace NBB.Api.Controllers
 
             return Ok(financialYearData);
         }
-
-
     }
 }
