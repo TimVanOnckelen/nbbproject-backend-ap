@@ -1,11 +1,10 @@
 ﻿using NBB.Api.Models;
-using NBB.Api.Repository;
 
 
 namespace NBB.Api.Repository
 {
 
-    public class InMemoryDB : IRepository
+    public class InMemoryDB<T> : IRepository<T> where T : class
     {
         private readonly List<Enterprise> _ondernemingen;
         public InMemoryDB()

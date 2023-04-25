@@ -4,7 +4,7 @@ using NBB.Api.Controllers;
 using NBB.Api.Models;
 using NBB.Api.Repository;
 
-namespace NBB.Api.Tests
+namespace NBB.Api.Tests.Controllers
 {
     public class EnterpriseControllerTests
     {
@@ -12,7 +12,7 @@ namespace NBB.Api.Tests
         public void Setup()
         {
 
-            
+
 
         }
 
@@ -20,7 +20,7 @@ namespace NBB.Api.Tests
         public void GetAll_DoesNotReturnNull()
         {
             // Arrange
-            var controller = new EnterpriseController(new InMemoryDB());
+            var controller = new EnterpriseController(new InMemoryDB<Enterprise>());
 
             // Act
             var result = controller.GetAll();
@@ -33,7 +33,7 @@ namespace NBB.Api.Tests
         public void Get_Returns404WhenEnterpriseNotFound()
         {
             // Arrange
-            var controller = new EnterpriseController(new InMemoryDB());
+            var controller = new EnterpriseController(new InMemoryDB<Enterprise>());
 
             // Act
             var ex = controller.Get("NotFound");
@@ -47,7 +47,7 @@ namespace NBB.Api.Tests
         public void Get_ReturnsOkWhenEnterpriseFound()
         {
             //Arrange
-            var controller = new EnterpriseController(new InMemoryDB());
+            var controller = new EnterpriseController(new InMemoryDB<Enterprise>());
             var takumi = new Enterprise
             {
                 EnterpriseName = "TAKUMI RAMEN KITCHEN ANTWERPEN",
