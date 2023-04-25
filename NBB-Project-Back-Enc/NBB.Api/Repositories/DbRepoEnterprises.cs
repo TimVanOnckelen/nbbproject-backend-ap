@@ -2,22 +2,20 @@
 using NBB.Api.Models;
 using NBB.Api.Repository;
 using NBB.Api.Services;
+using System.ComponentModel.Design;
 
 namespace NBB.Api.Repositories
 {
     public class DbRepoEnterprises: IRepository
     {
             private readonly IDbService<Enterprise> _context;
-            public DbRepoEnterprises(DbService<Enterprise> context)
+            public DbRepoEnterprises(IDbService<Enterprise> context)
             {
             
             _context = context;
             }
-            public async Task<IEnumerable<Enterprise>>  GetAll()
-            {
-            return await _context.GetAllAsync();
-            }
-            public  async Task<Enterprise> Get(int companyId)
+ 
+            public  async Task<Enterprise> Get(string companyId)
             {
                 return await _context.GetByIdAsync(companyId);
             }
@@ -31,7 +29,7 @@ namespace NBB.Api.Repositories
             }
             public async void Update(Enterprise onderneming)
             {
-                var current = await _context.GetByIdAsync(onderneming.Id);
+                var current = await _context.GetByIdAsync(onderneming.EnterpriseNumber);
                 var updated = onderneming;
                 if (current != null && updated != null)
                 {
@@ -39,15 +37,14 @@ namespace NBB.Api.Repositories
                 }
 
             }
-
-        public Enterprise Get(string ondernemingsnummer)
+        public async Task<IEnumerable<Enterprise>> GetAll()
         {
-            throw new NotImplementedException();
+            return await _context.GetAllAsync();
         }
 
-        IEnumerable<Enterprise> IRepository.GetAll()
+        async Task<Enterprise> IRepository.Get(string companyId)
         {
-            throw new NotImplementedException();
+            return await _context.GetByIdAsync(companyId);
         }
     }
     

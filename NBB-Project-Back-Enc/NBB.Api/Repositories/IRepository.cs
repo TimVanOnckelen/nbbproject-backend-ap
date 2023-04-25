@@ -7,8 +7,8 @@ namespace NBB.Api.Repository
     {
         void Add(Enterprise onderneming);
         void Delete(Enterprise onderneming);
-        Enterprise Get(string ondernemingsnummer);
-        IEnumerable<Enterprise> GetAll();
+        Task<Enterprise> Get(string ondernemingsnummer);
+        Task<IEnumerable<Enterprise>> GetAll();
         void Update(Enterprise onderneming);
     }
 }

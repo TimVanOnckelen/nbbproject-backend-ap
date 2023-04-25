@@ -1,7 +1,6 @@
 ﻿using NBB.Api.Models;
 using NBB.Api.Repository;
 
-
 namespace NBB.Api.Repository
 {
 
@@ -73,7 +72,7 @@ namespace NBB.Api.Repository
         {
             return _ondernemingen;
         }
-        public Enterprise    Get(string ondernemingsnummer)
+        public async Task<Enterprise>    Get(string ondernemingsnummer)
         {
             return _ondernemingen.FirstOrDefault(x => x.EnterpriseNumber == ondernemingsnummer);
         }
@@ -85,9 +84,9 @@ namespace NBB.Api.Repository
         {
             _ondernemingen.Remove(onderneming);
         }
-        public void Update(Enterprise onderneming)
+        public async void Update(Enterprise onderneming)
         {
-            var current = Get(onderneming.EnterpriseNumber);
+            var current = await Get(onderneming.EnterpriseNumber);
             var updated = onderneming;
             if(current != null && updated != null) 
             {
@@ -95,6 +94,16 @@ namespace NBB.Api.Repository
                 _ondernemingen.Add(updated);
             }
             
+        }
+
+        Task<IEnumerable<Enterprise>> IRepository.GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Enterprise> Get(int ondernemingsnummer)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -17,14 +17,14 @@ namespace NBB.Api.Services
             return await _dbContext.Entities.ToListAsync();
         }
 
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(string id)
         {
             return await _dbContext.Entities.FindAsync(id);
         }
 
         public async Task<T> CreateAsync(T entity)
         {
-            _dbContext.Entities.AddAsync(entity);
+            await _dbContext.Entities.AddAsync(entity);
             await _dbContext.SaveChangesAsync();
             return entity;
         }

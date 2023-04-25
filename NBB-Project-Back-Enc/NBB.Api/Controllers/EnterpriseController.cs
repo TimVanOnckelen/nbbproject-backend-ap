@@ -21,9 +21,9 @@ namespace NBB.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            var ondernemingen = _repository.GetAll();
+            var ondernemingen = await _repository.GetAll();
             return Ok(ondernemingen);
         }
 
@@ -33,9 +33,9 @@ namespace NBB.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult Get(string ondernemingsnummer)
+        public async Task<IActionResult> Get(string ondernemingsnummer)
         {
-            var onderneming = _repository.Get(ondernemingsnummer);
+            var onderneming = await _repository.Get(ondernemingsnummer);
 
             if (onderneming == null)
             {
@@ -50,9 +50,9 @@ namespace NBB.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult GetByYear(string ondernemingsnummer, int financialYear)
+        public async Task<IActionResult> GetByYear(string ondernemingsnummer, int financialYear)
         {
-            var onderneming = _repository.Get(ondernemingsnummer);
+            var onderneming = await _repository.Get(ondernemingsnummer);
             if(onderneming.FinancialDataArray == null)
             {
                 return NotFound();

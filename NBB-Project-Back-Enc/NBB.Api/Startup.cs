@@ -6,6 +6,7 @@ using NBB.Api.Repository;
 using System.Configuration;
 using Microsoft.EntityFrameworkCore;
 using NBB.Api.Repositories;
+using NBB.Api.Services;
 
 namespace NBB.Api
 {
@@ -21,10 +22,12 @@ namespace NBB.Api
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddTransient<IDbService<Enterprise>, DbService<Enterprise>>();
+            services.AddTransient<IRepository, DbRepoEnterprises>();
+
             var connection = configuration.GetConnectionString("Server=localhost;Database=master;Trusted_Connection=True;");
             services.AddDbContext<NbbDbContext<Enterprise>>(options =>
             options.UseSqlServer("Server=(localdb)\\MSSQLLocalDB;Integrated Security=true;Database=nbb;"));
-            services.AddScoped<IRepository, DbRepoEnterprises>();
             services.AddControllers();
             services.AddSwaggerGen();
 
