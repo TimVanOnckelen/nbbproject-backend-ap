@@ -1,10 +1,13 @@
-﻿namespace NBB.Api.Models
+﻿using System.Net;
+
+namespace NBB.Api.Models
 {
     public class Enterprise
     {
         public string ReferenceNumber { get; set; }
         public string DepositDate { get; set; }
-        public ExerciseDates ExerciseDates { get; set; }
+        public string startDate { get; set; }
+        public string endDate { get; set; }
         public string ModelType { get; set; }
         public string DepositType { get; set; }
         public string Language { get; set; }
@@ -22,7 +25,7 @@
         public string ImprovementDate { get; set; }
         public string CorrectedData { get; set; }
 
-        public List<FinancialData> FinancialDataArray { get; set; }
+        public FinancialData FinancialData { get; set; }
 
     }
 }

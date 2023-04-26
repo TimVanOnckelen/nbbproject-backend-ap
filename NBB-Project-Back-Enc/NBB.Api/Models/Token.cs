@@ -2,6 +2,6 @@
 {
     public class Token
     {
-        public string tokenId { get; set; }
+        public string TokenId { get; set; }
     }
 }

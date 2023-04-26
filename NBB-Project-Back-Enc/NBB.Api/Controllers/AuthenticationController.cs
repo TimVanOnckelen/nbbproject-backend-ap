@@ -1,20 +1,20 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
-using NBB.Api.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using NBB.Api.Models;
 
 namespace NBB.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TokenController : ControllerBase
+    public class AuthenticationController : Controller
     {
-        private readonly IConfiguration configuration;
+        private readonly IConfiguration _configuration;
 
-        public TokenController(IConfiguration configuration)
+        public AuthenticationController(IConfiguration configuration)
         {
-            this.configuration = configuration;
+            _configuration = configuration;
         }
 
         [HttpPost]
@@ -31,7 +31,7 @@ namespace NBB.Api.Controllers
             if (user != null)
             {
                 string tokenString = BuildToken(user);
-                return Ok(new Token { tokenId = tokenString });
+                return Ok(new Token { TokenId = tokenString });
             }
 
             return response;
@@ -39,15 +39,15 @@ namespace NBB.Api.Controllers
 
         private string BuildToken(User userModel)
         {
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:ServerSecret"]));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:ServerSecret"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-                configuration["JWT:Issuer"],
-                configuration["JWT:Issuer"],
+                _configuration["JWT:Issuer"],
+                _configuration["JWT:Issuer"],
                 expires: DateTime.Now.AddMinutes(60),
                 signingCredentials: credentials
-                );
+            );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
 
@@ -65,5 +65,7 @@ namespace NBB.Api.Controllers
             }
             return null;
         }
+
+
     }
 }

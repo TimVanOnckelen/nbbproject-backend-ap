@@ -2,6 +2,7 @@
 {
     public class Address
     {
+        public int id { get; set; }
         public string Box { get; set; }
         public string City { get; set; }
         public string CountryCode { get; set; }
