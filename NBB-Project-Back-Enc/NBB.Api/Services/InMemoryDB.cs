@@ -1,10 +1,8 @@
 ﻿using NBB.Api.Models;
 
-
-namespace NBB.Api.Repository
+namespace NBB.Api.Services
 {
-
-    public class InMemoryDB<T> : IRepository<T> where T : class
+    public class InMemoryDB : IEnterpriseRepository
     {
         private readonly List<Enterprise> _ondernemingen;
         public InMemoryDB()
@@ -15,12 +13,9 @@ namespace NBB.Api.Repository
                 {
                     ReferenceNumber = "2021-00000148",
                     DepositDate = "2021-12-07",
-                    ExerciseDates = new ExerciseDates
-                    {
-                        startDate = "2020-01-01",
-                        endDate = "2020-12-31"
-                    },
-                    ModelType = "m02-f",
+                    startDate = "2020-01-01",
+                        endDate = "2020-12-31",
+                        ModelType = "m02-f",
                     DepositType = "Initial",
                     Language = "NL",
                     Currency = "EUR",
@@ -43,34 +38,21 @@ namespace NBB.Api.Repository
                     DataVersion = "Authentic",
                     ImprovementDate = null,
                     CorrectedData = null,
-                    FinancialDataArray = new List<FinancialData>()
+                    FinancialData = new FinancialData()
                     {
-                        new FinancialData
-                        {
-                            Id = 1,
-                            Year = 2021,
-                            Profit = 10000,
-                            Revenue = 21102
-                        },
-                        new FinancialData
-                        {
-                            Id = 2,
-                            Year = 2022,
-                            Profit = 12345,
-                            Revenue = 54321
-                        }
+                        Id = 1,
+                        Year = 2021,
+                        Profit = 10000,
+                        Revenue = 21102
                     }
                 },
                 new Enterprise
                 {
                     ReferenceNumber = "2021-00000148",
                     DepositDate = "2021-12-07",
-                    ExerciseDates = new ExerciseDates
-                    {
-                        startDate = "2020-01-01",
-                        endDate = "2020-12-31"
-                    },
-                    ModelType = "m02-f",
+                    startDate = "2020-01-01",
+                        endDate = "2020-12-31",
+                        ModelType = "m02-f",
                     DepositType = "Initial",
                     Language = "NL",
                     Currency = "EUR",
@@ -93,16 +75,12 @@ namespace NBB.Api.Repository
                     DataVersion = "Authentic",
                     ImprovementDate = null,
                     CorrectedData = null,
-                    FinancialDataArray = new List<FinancialData>()
+                    FinancialData = new FinancialData()
                     {
-                        new FinancialData
-                        {
-                            Id = 1,
-                            Year = 2021,
-                            Profit = 3420,
-                            Revenue = -1102
-                        },
-          
+                        Id = 1,
+                        Year = 2021,
+                        Profit = 3420,
+                        Revenue = -1102
                     }
                 }
             };
@@ -111,7 +89,7 @@ namespace NBB.Api.Repository
         {
             return _ondernemingen;
         }
-        public Enterprise    Get(string ondernemingsnummer)
+        public Enterprise Get(string ondernemingsnummer)
         {
             return _ondernemingen.FirstOrDefault(x => x.EnterpriseNumber == ondernemingsnummer);
         }
@@ -127,12 +105,12 @@ namespace NBB.Api.Repository
         {
             var current = Get(onderneming.EnterpriseNumber);
             var updated = onderneming;
-            if(current != null && updated != null) 
+            if (current != null && updated != null)
             {
                 _ondernemingen.Remove(current);
                 _ondernemingen.Add(updated);
             }
-            
+
         }
     }
 }

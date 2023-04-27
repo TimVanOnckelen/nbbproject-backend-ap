@@ -1,5 +1,8 @@
-﻿public interface IAuthenticationService
+﻿namespace NBB.Api.Services
 {
-    Task<bool> AuthenticateUserAsync(string username, string password);
-    string HashPassword(string password);
+    public interface IAuthenticationService
+    {
+        Task<bool> AuthenticateUserAsync(string username, string password);
+        string HashPassword(string password);
+    }
 }

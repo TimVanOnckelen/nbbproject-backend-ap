@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Hosting;
 using NBB.Api;
 
 await Host.CreateDefaultBuilder(args)
