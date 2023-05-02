@@ -1,4 +1,5 @@
-﻿using NBB.Api.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using NBB.Api.Entities;
 using NBB.Api.Models;
 
 namespace NBB.Api.Services
@@ -14,12 +15,19 @@ namespace NBB.Api.Services
 
         public IEnumerable<Enterprise> GetAll()
         {
-            return _context.Enterprises.ToList();
+            return _context.Enterprises
+                .Include(e => e.FinancialData)
+                .Include(e => e.Address)
+                .ToList();
         }
 
         public Enterprise Get(string id)
         {
-            return _context.Enterprises.FirstOrDefault(x => x.EnterpriseNumber == id);
+            var findata = _context.Enterprises
+                .Include(e => e.FinancialData)
+                .Include(e => e.Address)
+                .ToList();
+            return findata.FirstOrDefault(x => x.EnterpriseNumber == id);
         }
 
         public void Add(Enterprise enterprise)
