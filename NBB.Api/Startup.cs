@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using NBB.Api.Entities;
 using NBB.Api.Services;
 
@@ -35,8 +36,8 @@ namespace NBB.Api
             services.AddScoped<IEnterpriseRepository, EfNBBRepository>();
             services.AddControllers();
             services.AddSwaggerGen();
-            var connection = _configuration.GetConnectionString("NBBDatabase");
-            services.AddDbContext<NBBDBContext>(x => x.UseMySql(connection, ServerVersion.AutoDetect(connection)));
+            var connection = _configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
+            services.AddDbContext<NBBDBContext>(x => x.UseSqlServer(connection));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -44,12 +45,7 @@ namespace NBB.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("./swagger/v1/swagger.json", "Enterprise API");
-                    c.RoutePrefix = String.Empty;
-                });
+
             }
             else
             {
@@ -58,7 +54,12 @@ namespace NBB.Api
                     ExceptionHandler = context => context.Response.WriteAsync("OOPS")
                 });
             }
-
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("./swagger/v1/swagger.json", "NBB API");
+                c.RoutePrefix = String.Empty;
+            });
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();

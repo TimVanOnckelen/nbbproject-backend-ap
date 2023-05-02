@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using NBB.Api.Models;
 using NBB.Api.Services;
+using NBB.Api.ViewModels;
 
 namespace NBB.Api.Controllers
 {
@@ -43,6 +44,24 @@ namespace NBB.Api.Controllers
             return Ok(enterprise);
         }
 
+        [HttpPost]
+        [ProducesResponseType(typeof(List<Enterprise>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public IActionResult GetDouble([FromBody]EnterpriseArrayViewModel EntArray)
+        {
+            var enterprises = new List<Enterprise>();
+            EntArray.EnterpriseNumbers.ForEach(e =>
+            {
+                var enterprise = _repository.Get(e);
+                if(enterprise != null) enterprises.Add(enterprise);
+            });
+
+            if(enterprises.Count == 0) return NotFound();
+
+            return Ok(enterprises);
+        }
 
     }
 }

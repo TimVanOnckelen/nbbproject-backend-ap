@@ -3,6 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using NBB.Api.Models;
+using NBB.Api.ViewModels;
 
 namespace NBB.Api.Controllers
 {
@@ -22,11 +23,16 @@ namespace NBB.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public IActionResult CreateToken([FromBody] UserLogin loginModel)
+        public IActionResult CreateToken([FromBody] UserLoginViewModel loginModel)
         {
             IActionResult response = Unauthorized();
 
-            User user = Authenticate(loginModel);
+            var userModel = new UserLogin 
+            {
+                UserName = loginModel.UserName,
+                Password = loginModel.Password
+            };
+            User user = Authenticate(userModel);
 
             if (user != null)
             {
