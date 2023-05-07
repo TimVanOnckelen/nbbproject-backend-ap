@@ -14,20 +14,13 @@ namespace NBB.Api.Services
         }
 
 
-        public User Get(string userName)
-        {
-            var user = _context.User.FirstOrDefault(u => u.UserName == userName);
-
-            return user;
-        }
+        public User Get(string userName) => 
+            _context.User.FirstOrDefault(u => u.UserName == userName);
 
         public void Add(User user)
         {
-            var validateUser = _context.User.FirstOrDefault(u => u.Id == user.Id);
-
-            if (validateUser == null)
-                _context.User.Add(user);
-
+       
+            _context.User.Add(user);
             _context.SaveChanges();
         }
 
