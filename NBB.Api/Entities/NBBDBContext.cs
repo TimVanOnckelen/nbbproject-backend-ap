@@ -11,7 +11,7 @@ namespace NBB.Api.Entities
         public DbSet<FinancialData> FinancialData { get; set;}
         public DbSet<Address> Address { get; set; }
 
-        public DbSet<UserLogin> UserLogin { get; set; }
+        public DbSet<User> User { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
