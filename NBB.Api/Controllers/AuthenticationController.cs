@@ -66,15 +66,17 @@ namespace NBB.Api.Controllers
         {
             var user = _repository.Get(loginModel.UserName);
 
-            if (user.Password == loginModel.Password)
+            if (user != null && user.Password == loginModel.Password)
             {
                 return new User()
-            {
+                {
                     UserName = loginModel.UserName,
                     Password = loginModel.Password
                 };
             }
+
             return null;
         }
+
     }
 }
