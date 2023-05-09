@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NBB.Api.Models;
 using NBB.Api.Services;
 using NBB.Api.ViewModels;
+using System.Security.Cryptography;
 
 namespace NBB.Api.Controllers
 {
@@ -23,20 +24,32 @@ namespace NBB.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Post([FromBody] UserCreateViewModel user)
         {
-            var existingUser = _repository.Get(user.UserName);
-            if (existingUser != null) return BadRequest();
+            // var existingUser = _repository.Get(user.UserName);
+            // if (existingUser != null) return BadRequest();
 
             var newUser = new User
             {
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 UserName = user.UserName,
-                Password = user.Password
+                Password = HashPassword(user.Password)
             };
 
             _repository.Add(newUser);
 
-            return View(newUser);
+            return CreatedAtAction(nameof(Get), new {newUser.Id}, newUser);
+        }
+
+        private string HashPassword(string password)
+        {
+            byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
+
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+
+                return Convert.ToBase64String(hashBytes);
+            }
         }
 
         [HttpGet("{userName}")]
@@ -48,6 +61,8 @@ namespace NBB.Api.Controllers
         {
             var user = _repository.Get(userName);
             if (user == null) return NotFound();
+
+            user.Password = "";
 
             return Ok(user);
         }
@@ -67,7 +82,7 @@ namespace NBB.Api.Controllers
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 UserName = userToUpdate.UserName,
-                Password = user.Password
+                Password = HashPassword(user.Password)
             };
 
             _repository.Update(updatedUser);

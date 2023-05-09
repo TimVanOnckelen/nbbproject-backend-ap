@@ -5,6 +5,7 @@ using System.Text;
 using NBB.Api.Models;
 using NBB.Api.ViewModels;
 using NBB.Api.Services;
+using System.Security.Cryptography;
 
 namespace NBB.Api.Controllers
 {
@@ -33,7 +34,7 @@ namespace NBB.Api.Controllers
             var userModel = new UserLogin 
             {
                 UserName = loginModel.UserName,
-                Password = loginModel.Password
+                Password = HashPassword(loginModel.Password)
             };
             User user = Authenticate(userModel);
 
@@ -44,6 +45,18 @@ namespace NBB.Api.Controllers
             }
 
             return response;
+        }
+
+        private string HashPassword(string password)
+        {
+            byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
+
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+
+                return Convert.ToBase64String(hashBytes);
+            }
         }
 
         private string BuildToken(User user)
