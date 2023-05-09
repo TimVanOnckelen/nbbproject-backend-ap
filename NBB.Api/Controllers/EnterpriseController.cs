@@ -23,6 +23,7 @@ namespace NBB.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize]
         public IActionResult GetAll()
         {
             var enterprises = _repository.GetAll();
@@ -36,6 +37,7 @@ namespace NBB.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize]
         public IActionResult Get(string id)
         {
             var enterprise = _repository.Get(id);
@@ -49,6 +51,7 @@ namespace NBB.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Authorize]
         public IActionResult GetDouble([FromBody]EnterpriseArrayViewModel EntArray)
         {
             var enterprises = new List<Enterprise>();
