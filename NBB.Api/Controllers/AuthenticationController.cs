@@ -4,6 +4,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using NBB.Api.Models;
 using NBB.Api.ViewModels;
+using NBB.Api.Services;
+using System.Security.Cryptography;
 
 namespace NBB.Api.Controllers
 {
@@ -12,10 +14,12 @@ namespace NBB.Api.Controllers
     public class AuthenticationController : Controller
     {
         private readonly IConfiguration _configuration;
+        private readonly IUserRepository _repository;
 
-        public AuthenticationController(IConfiguration configuration)
+        public AuthenticationController(IConfiguration configuration, IUserRepository userRepository)
         {
             _configuration = configuration;
+            _repository = userRepository;
         }
 
         [HttpPost]
@@ -30,7 +34,7 @@ namespace NBB.Api.Controllers
             var userModel = new UserLogin 
             {
                 UserName = loginModel.UserName,
-                Password = loginModel.Password
+                Password = HashPassword(loginModel.Password)
             };
             User user = Authenticate(userModel);
 
@@ -43,7 +47,19 @@ namespace NBB.Api.Controllers
             return response;
         }
 
-        private string BuildToken(User userModel)
+        private string HashPassword(string password)
+        {
+            byte[] passwordBytes = System.Text.Encoding.UTF8.GetBytes(password);
+
+            using (var sha256 = SHA256.Create())
+            {
+                byte[] hashBytes = sha256.ComputeHash(passwordBytes);
+
+                return Convert.ToBase64String(hashBytes);
+            }
+        }
+
+        private string BuildToken(User user)
         {
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:ServerSecret"]));
             var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -51,7 +67,7 @@ namespace NBB.Api.Controllers
             var token = new JwtSecurityToken(
                 _configuration["JWT:Issuer"],
                 _configuration["JWT:Issuer"],
-                expires: DateTime.Now.AddMinutes(60),
+                expires: DateTime.Now.AddMinutes(30),
                 signingCredentials: credentials
             );
 
@@ -61,7 +77,9 @@ namespace NBB.Api.Controllers
 
         private User Authenticate(UserLogin loginModel)
         {
-            if (loginModel.UserName == "Pablo" && loginModel.Password == "QWERTY")
+            var user = _repository.Get(loginModel.UserName);
+
+            if (user != null && user.Password == loginModel.Password)
             {
                 return new User()
                 {
@@ -69,9 +87,9 @@ namespace NBB.Api.Controllers
                     Password = loginModel.Password
                 };
             }
+
             return null;
         }
-
 
     }
 }

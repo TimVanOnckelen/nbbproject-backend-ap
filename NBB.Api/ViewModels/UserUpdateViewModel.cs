@@ -1,12 +1,16 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace NBB.Api.Models
+namespace NBB.Api.ViewModels
 {
-    public class User : IdentityUser
+    public class UserUpdateViewModel
     {
+        [Required]
         public string FirstName { get; set; }
+        [Required] 
         public string LastName { get; set; }
+        [Required]
         public string UserName { get; set; }
+        [Required]
         public string Password { get; set; }
     }
 }

@@ -34,6 +34,7 @@ namespace NBB.Api
                     };
                 });
             services.AddScoped<IEnterpriseRepository, EfNBBRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddControllers();
             services.AddSwaggerGen();
             var connection = _configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
