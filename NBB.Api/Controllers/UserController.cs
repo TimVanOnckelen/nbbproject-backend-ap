@@ -24,8 +24,8 @@ namespace NBB.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult Post([FromBody] UserCreateViewModel user)
         {
-            // var existingUser = _repository.Get(user.UserName);
-            // if (existingUser != null) return BadRequest();
+            var existingUser = _repository.Get(user.UserName);
+            if (existingUser != null) return BadRequest();
 
             var newUser = new User
             {
@@ -36,8 +36,8 @@ namespace NBB.Api.Controllers
             };
 
             _repository.Add(newUser);
-
-            return CreatedAtAction(nameof(Get), new {newUser.Id}, newUser);
+            
+            return CreatedAtAction(nameof(Get), new {newUser.UserName}, newUser);
         }
 
         private string HashPassword(string password)
