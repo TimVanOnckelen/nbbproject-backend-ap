@@ -61,7 +61,7 @@ namespace NBB.Api.Controllers
                 if(enterprise != null) enterprises.Add(enterprise);
             });
 
-            if(enterprises.Count == 0) return NotFound();
+            if(enterprises.Count != 2) return NotFound();
 
             return Ok(enterprises);
         }

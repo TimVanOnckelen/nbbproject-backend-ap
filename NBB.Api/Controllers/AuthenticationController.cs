@@ -6,6 +6,7 @@ using NBB.Api.Models;
 using NBB.Api.ViewModels;
 using NBB.Api.Services;
 using System.Security.Cryptography;
+using System.Runtime.CompilerServices;
 
 namespace NBB.Api.Controllers
 {

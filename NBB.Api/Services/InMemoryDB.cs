@@ -89,9 +89,9 @@ namespace NBB.Api.Services
         {
             return _ondernemingen;
         }
-        public Enterprise Get(string ondernemingsnummer)
+        public Enterprise Get(string id)
         {
-            return _ondernemingen.FirstOrDefault(x => x.EnterpriseNumber == ondernemingsnummer);
+            return _ondernemingen.FirstOrDefault(x => x.EnterpriseNumber == id);
         }
         public void Add(Enterprise onderneming)
         {
