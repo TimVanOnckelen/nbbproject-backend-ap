@@ -406,3 +406,6 @@ NBB-Project-Back-Enc/NBB.Api/obj/project.nuget.cache
 NBB-Project-Back-Enc/NBB.Api/obj/Debug/net6.0/NBB.Api.assets.cache
 NBB-Project-Back-Enc/NBB.Api/obj/Debug/net6.0/NBB.Api.csproj.AssemblyReference.cache
 NBB-Project-Back-Enc/NBB.Api/obj/Debug/net6.0/NBB.Api.GeneratedMSBuildEditorConfig.editorconfig
+/NBB-Project-Back-Enc/NBB.Api.Tests/Properties/ServiceDependencies/NBBApi20230423164213 - Web Deploy/profile.arm.json
+/NBB-Project-Back-Enc/NBB.Api.Tests/Properties/ServiceDependencies/NBBApiTests20230427212207 - Web Deploy/profile.arm.json
+/NBB-Project-Back-Enc/NBB.Api.Tests/Settings.job
